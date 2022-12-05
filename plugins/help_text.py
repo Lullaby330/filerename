@@ -41,7 +41,7 @@ async def help_user(bot, update):
     update_channel = Config.UPDATE_CHANNEL
     if update_channel:
         try:
-            user = await bot.get_chat_member(update_channel, chat_id)
+            user = await bot.get_chat_member(update_channel, message.from_user.id)
             if user.status == "kicked":
                await update.reply_text(" Sorry, You're Banned")
                return
@@ -55,7 +55,7 @@ async def help_user(bot, update):
             return
         else:
             await bot.send_message(
-        chat_id=chat_id,
+        chat_id=message.from_user.id,
         text=Translation.HELP_USER,
         reply_markup=InlineKeyboardMarkup(
             [
